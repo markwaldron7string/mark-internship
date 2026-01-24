@@ -11,20 +11,28 @@ const NewItems = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+    
     const fetchItems = async () => {
       try {
-        const response = await fetch("https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems");
+        const response = await fetch(
+          "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
+          { signal: controller.signal }
+        );
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
-        setItems(data); 
+        setItems(Array.isArray(data) ? data : []);
       } catch (err) {
-        setError("Unable to load items. Please try again later.");
+        if (err.name !== "AbortError") {
+          setError("Unable to load items. Please try again later.");
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchItems();
+    return () => controller.abort();
   }, []);
 
   return (
@@ -37,10 +45,28 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {error && <div className="alert alert-danger" role="alert">{error}</div>}
-          <OwlCarousel className="owl-theme" items={4} nav dots={false} margin={16} loop>
+          {error && (
+            <div className="alert alert-danger" role="alert">
+              {error}
+            </div>
+          )}
+          <OwlCarousel 
+            className="owl-theme" 
+            items={4} 
+            nav 
+            dots={false} 
+            margin={16} 
+            loop
+            key={loading ? "loading" : items.length}
+            responsive={{
+              0: { items: 1 },
+              600: { items: 2 },
+              992: { items: 3 },
+              1200: { items: 4 },
+            }}
+            >
             {loading ? (
-              Array.from({ length: 6 }).map((_, index) => (
+              Array.from({ length: 7 }).map((_, index) => (
                 <div className="item" key={index}>
                   <Skeleton width="100%" height="200px" borderRadius="10px" />
                 </div>
@@ -55,9 +81,11 @@ const NewItems = () => {
                         <i className="fa fa-check"></i>
                       </Link>
                     </div>
-                    <div className="de_countdown">
+                    {item.expiryDate > Date.now() && (
+                      <div className="de_countdown">
                       <CountdownTimer expiryDate={item.expiryDate} />
                     </div>
+                    )}
                     <div className="nft__item_wrap">
                       <Link to={`/item-details/${item.nftId}`}>
                         <img src={item.nftImage} className="lazy nft__item_preview" alt={item.title} loading="lazy" />
