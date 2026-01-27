@@ -52,9 +52,9 @@ const TopSellers = () => {
             <ol className="author_list">
               {loading ? (
                 Array.from({ length: 12 }).map((_, index) => (
-                    <li key={index}>
-                      <div className="author_list_pp">
-                        <Skeleton width="50px" height="50px" borderRadius="50%" />
+                  <li key={index}>
+                    <div className="author_list_pp">
+                      <Skeleton width="50px" height="50px" borderRadius="50%" />
                       <i className="fa fa-check"></i>
                     </div>
                     <div className="author_list_info">
