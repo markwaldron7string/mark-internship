@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import Skeleton from "../UI/Skeleton"; 
+import nftImage from "../../images/nftImage.jpg";
 
 const SkeletonLoader = () => {
   return (
@@ -12,7 +13,9 @@ const SkeletonLoader = () => {
           <i className="fa fa-check"></i>
         </div>
         <div className="de_countdown">
-          <Skeleton width="100px" height="20px" /> {/* Countdown placeholder */}
+          <div style={{marginTop: '7px'}}>
+            <Skeleton width="100px" height="20px" />
+          </div> {/* Countdown placeholder */}
         </div>
         <div className="nft__item_wrap">
           <Skeleton width="100%" height="200px" borderRadius="10px" /> {/* NFT item image placeholder */}
@@ -21,7 +24,6 @@ const SkeletonLoader = () => {
           <Skeleton width="80%" height="20px" /> {/* Title placeholder */}
           <Skeleton width="60%" height="20px" /> {/* Price placeholder */}
           <div className="nft__item_like">
-            <i className="fa fa-heart"></i>
             <Skeleton width="30px" height="20px" /> {/* Likes placeholder */}
           </div>
         </div>

@@ -47,18 +47,18 @@ const AuthorItems = () => {
               <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={item.nftId}>
                 <div className="nft__item">
                   <div className="author_list_pp">
-                    <Link to="">
+                    <Link to={`/item-details/${item.nftId}`}>
                       <img className="lazy" src={authorImage || AuthorImage} alt="Author" />
                       <i className="fa fa-check"></i>
                     </Link>
                   </div>
                   <div className="nft__item_wrap">
-                    <Link to="/item-details">
+                    <Link to={`/item-details/${item.nftId}`}>
                       <img src={item.nftImage} className="lazy nft__item_preview" alt="" />
                     </Link>
                   </div>
                   <div className="nft__item_info">
-                    <Link to="/item-details">
+                    <Link to={`/item-details/${item.nftId}`}>
                       <h4>{item.title}</h4>
                     </Link>
                     <div className="nft__item_price">{item.price} ETH</div>
