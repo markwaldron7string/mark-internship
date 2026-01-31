@@ -49,15 +49,18 @@ const TopSellers = () => {
             </div>
           )}
           <div className="col-md-12">
-            <ol className="author_list">
+            <ol data-aos="fade-in"
+                data-aos-delay="100" className="author_list">
               {loading ? (
                 Array.from({ length: 12 }).map((_, index) => (
                   <li key={index}>
-                    <div className="author_list_pp">
+                    <div data-aos="fade-in"
+                      data-aos-delay="100" className="author_list_pp">
                       <Skeleton width="50px" height="50px" borderRadius="50%" />
                       <i className="fa fa-check"></i>
                     </div>
-                    <div className="author_list_info">
+                    <div data-aos="fade-in"
+                      data-aos-delay="100" className="author_list_info">
                       <Skeleton width="100px" height="20px" />
                       <Skeleton width="50px" height="20px" />
                     </div>
@@ -66,7 +69,8 @@ const TopSellers = () => {
               ) : (
                 sellers.map((seller) => (
                   <li key={seller.id}>
-                    <div className="author_list_pp">
+                    <div data-aos="fade-in"
+                      data-aos-delay="100" className="author_list_pp">
                       <Link to={`/author/${seller.authorId}`}>
                         <img
                           className="lazy pp-author"
@@ -76,7 +80,8 @@ const TopSellers = () => {
                         <i className="fa fa-check"></i>
                       </Link>
                     </div>
-                    <div className="author_list_info">
+                    <div data-aos="fade-in"
+                      data-aos-delay="100" className="author_list_info">
                       <Link to={`/author/${seller.authorId}`}>{seller.authorName}</Link>
                       <span>{seller.price} ETH</span>
                     </div>
