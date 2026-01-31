@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import Skeleton from "../UI/Skeleton"; 
-import nftImage from "../../images/nftImage.jpg";
 
 const SkeletonLoader = () => {
   return (
